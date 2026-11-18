@@ -448,16 +448,27 @@ void drawBubbles() {
 
 // ---------- Water surface ----------
 
-// Wave height at any (x, z) point
+// Two overlapping sine waves in different directions give a more natural ripple.
+// Wave 1: broad, slow swell.  Wave 2: smaller, faster ripples.
 static float waveY(float x, float z, float t) {
-    return WATER_LEVEL + std::sin(t * 2.0f + x * 0.5f + z * 0.4f) * 0.20f;
+    float w1 = std::sin(t * 2.0f + x * 0.5f + z * 0.4f) * 0.20f;
+    float w2 = std::sin(t * 3.5f - x * 1.2f + z * 0.9f) * 0.07f;
+    return WATER_LEVEL + w1 + w2;
 }
 
-// Wave normal from the derivative of waveY:
-// y = A*sin(w*t + a*x + b*z)  ->  N = (-dy/dx, 1, -dy/dz)
+// Normal from the partial derivatives of waveY.
+// For y = A*sin(k·p + wt), dy/dx = A*kx*cos(...), dy/dz = A*kz*cos(...)
+// Normal = (-dy/dx, 1, -dy/dz), then normalized.
 static V3 waveNormal(float x, float z, float t) {
-    float c = std::cos(t * 2.0f + x * 0.5f + z * 0.4f) * 0.20f;
-    return { -c * 0.5f, 1.0f, -c * 0.4f };
+    float c1 = std::cos(t * 2.0f + x * 0.5f + z * 0.4f) * 0.20f;
+    float c2 = std::cos(t * 3.5f - x * 1.2f + z * 0.9f) * 0.07f;
+
+    float dydx = c1 * 0.5f + c2 * (-1.2f);
+    float dydz = c1 * 0.4f + c2 * 0.9f;
+
+    V3 n = { -dydx, 1.0f, -dydz };
+    float len = std::sqrt(n.x * n.x + n.y * n.y + n.z * n.z);
+    return { n.x / len, n.y / len, n.z / len };
 }
 
 void drawWaterSurface() {
