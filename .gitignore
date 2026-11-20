@@ -1,0 +1,13 @@
+/build/
+/.vs/
+/out/
+[Cc][Mm]akeFiles/
+[Cc]MakeCache.txt
+cmake_install.cmake
+build.ninja
+.ninja_deps
+.ninja_log
+**/output/*.exe
+**/output/*.ilk
+**/output/*.pdb
+InstallationLog.txt

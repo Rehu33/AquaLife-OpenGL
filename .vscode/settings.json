@@ -1,0 +1,10 @@
+{
+  "cmake.generator": "Ninja",
+  "cmake.cmakePath": "C:/msys64/ucrt64/bin/cmake.exe",
+  "cmake.configureSettings": {
+    "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
+    "CMAKE_MAKE_PROGRAM": "C:/msys64/ucrt64/bin/ninja.exe",
+    "CMAKE_PREFIX_PATH": "C:/msys64/ucrt64"
+  },
+  "cmake.buildDirectory": "${workspaceFolder}/build"
+}

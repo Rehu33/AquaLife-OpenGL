@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AquaLife: configure",
+      "type": "shell",
+      "command": "C:/msys64/ucrt64/bin/cmake.exe",
+      "args": [
+        "-S", "${workspaceFolder}",
+        "-B", "${workspaceFolder}/build",
+        "-G", "Ninja",
+        "-DCMAKE_CXX_COMPILER=C:/msys64/ucrt64/bin/g++.exe",
+        "-DCMAKE_MAKE_PROGRAM=C:/msys64/ucrt64/bin/ninja.exe",
+        "-DCMAKE_PREFIX_PATH=C:/msys64/ucrt64"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AquaLife: build",
+      "type": "shell",
+      "command": "C:/msys64/ucrt64/bin/cmake.exe",
+      "args": ["--build", "${workspaceFolder}/build"],
+      "dependsOn": "AquaLife: configure",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "AquaLife: run",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/AquaLife.exe",
+      "dependsOn": "AquaLife: build",
+      "options": {
+        "env": {
+          "PATH": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
+        }
+      },
+      "problemMatcher": []
+    }
+  ]
+}
