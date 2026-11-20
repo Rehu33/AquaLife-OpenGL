@@ -1,4 +1,4 @@
-# AquaLife: An Interactive 3D Aquarium Animation Using OpenGL
+# 🐠 AquaLife: An Interactive 3D Aquarium Animation Using OpenGL
 
 AquaLife is an interactive 3D aquarium written in C++ with OpenGL and FreeGLUT. Five fish swim inside a glass tank over a sandy floor, with animated water, rising bubbles, swaying plants, and fog for depth. The whole scene is drawn in code, so no image or model files are needed.
 
@@ -12,7 +12,7 @@ This project was built for the Computer Graphics Lab (CSE-4742) at the Internati
 
 ![Water ripple 2](Screenshots/2.png)
 
-## Features
+## ✨ Features
 
 - **Glass tank** with transparent walls and an edge outline.
 - **Sandy floor** and a blue underwater background with exponential fog.
@@ -51,7 +51,7 @@ g++ src/main.cpp -o AquaLife -lglut -lGL -lGLU
 ./AquaLife
 ```
 
-## Controls
+## 🎮 Controls
 
 | Key | Action |
 | --- | --- |
