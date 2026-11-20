@@ -1,210 +1,110 @@
-# 🐠 AquaLife: An Interactive 3D Aquarium Animation Using OpenGL
+# AquaLife: An Interactive 3D Aquarium Animation Using OpenGL
 
-\<p align="center">   \<strong>Explore an Animated Underwater World with C++, OpenGL & FreeGLUT\</strong> \</p>
+AquaLife is an interactive 3D aquarium written in C++ with OpenGL and FreeGLUT. Five fish swim inside a glass tank over a sandy floor, with animated water, rising bubbles, swaying plants, and fog for depth. The whole scene is drawn in code, so no image or model files are needed.
 
-\<p align="center">   A Computer Graphics Lab Project \</p>
+This project was built for the Computer Graphics Lab (CSE-4742) at the International Islamic University Chittagong, Spring 2026.
 
----
+## Screenshots
 
-## 📖 About the Project
+### Water surface and ripples
 
-**AquaLife** is an interactive 3D aquarium animation project developed using **C++, OpenGL, and FreeGLUT**. It creates a virtual underwater environment featuring colorful animated fish, rising bubbles, swaying aquatic plants, animated water waves, underwater lighting, and interactive camera controls.
+![Water ripple 1](Screenshots/1.png)
 
-The primary goal of this project is to demonstrate fundamental computer graphics concepts through an engaging and visually appealing 3D aquarium simulation.
+![Water ripple 2](Screenshots/2.png)
 
-## 🎯 Project Objectives
+## Features
 
-- Create an interactive 3D aquarium environment.
-- Design and animate different types of fish.
-- Implement realistic underwater effects and environmental animations.
-- Apply fundamental computer graphics algorithms.
-- Demonstrate 3D transformations, lighting, and animation techniques.
-- Develop an engaging underwater simulation using OpenGL.
+- **Glass tank** with transparent walls and an edge outline.
+- **Sandy floor** and a blue underwater background with exponential fog.
+- **Five 3D fish** in different colours. Each fish has a parametric body, white stripes, eyes, a dorsal fin, pectoral fins, and a tail.
+- **Fish movement:** tail and fin animation, random wandering, and turning away from the tank walls.
+- **Animated water surface** built from two overlapping sine waves, with per-vertex normals for lighting highlights.
+- **50 bubbles** that rise from the floor with side-to-side wobble and restart when they reach the surface.
+- **20 swaying plants** drawn as chains of cylinders.
+- **Camera controls:** rotate, zoom, pause, and reset.
 
-## ✨ Features
+## Requirements
 
-### 🐟 3D Aquarium Environment
+- Windows or Linux
+- A C++ compiler that supports C++11 or later (for example, MinGW-w64 g++ on Windows)
+- FreeGLUT and OpenGL development libraries
+- A graphics driver with OpenGL support
 
-- 3D aquarium tank with transparent glass walls.
-- Sandy aquarium floor.
-- Underwater blue background.
-- Underwater lighting and fog effects.
-- Specular lighting highlights.
+## Build and Run
 
-### 🌊 Animated Water Surface
+### Windows (MinGW-w64)
 
-- Animated water surface using sine-based wave functions.
-- Smooth and continuous water movement.
-- Transparent blue water surface.
-- Dynamic wave animation using timer-based updates.
+Install FreeGLUT for MinGW, then run these commands in the project folder:
 
-### 🐠 Fish Modeling and Animation
-
-- Multiple colorful 3D fish.
-- Parametric 3D fish body modeling.
-- Detailed fish eyes, dorsal fins, pectoral fins, and tails.
-- White decorative body stripes.
-- Continuous swimming animation.
-- Animated tail and fin movements.
-- Automatic direction changes near aquarium boundaries.
-
-### 🫧 Underwater Elements
-
-- 50 rising animated bubbles.
-- Side-to-side bubble movement.
-- 20 swaying aquatic plants.
-
-### 🎮 Interactive Controls
-
-- Camera rotation.
-- Zoom in and zoom out.
-- Camera reset.
-- Pause and resume animation.
-- Exit functionality.
-
-## 🛠️ Technologies Used
-
-| Technology         | Purpose                           |
-| ------------------ | --------------------------------- |
-| C++                | Core programming language         |
-| OpenGL             | 3D graphics rendering             |
-| FreeGLUT           | Window management and interaction |
-| MinGW / GCC        | C++ compilation                   |
-| Visual Studio Code | Development environment           |
-
-## 🎮 Controls
-
-| Key       | Action                     |
-| --------- | -------------------------- |
-| ↑ / ↓     | Rotate camera vertically   |
-| ← / →     | Rotate camera horizontally |
-| `+` / `=` | Zoom in                    |
-| `-` / `_` | Zoom out                   |
-| `R`       | Reset camera               |
-| `Space`   | Pause / Resume animation   |
-| `Esc`     | Exit the application       |
-
-## ⚙️ Installation and Setup
-
-### Prerequisites
-
-Make sure the following tools and libraries are installed:
-
-- Windows operating system
-- Visual Studio Code
-- MinGW / GCC compiler
-- OpenGL libraries
-- FreeGLUT library
-
-### Steps to Run
-
-**1. Clone the repository**
-
-```bash
-git clone https://github.com/Rehu33/AquaLife-OpenGL.git
+```cmd
+g++ src/main.cpp -o AquaLife -lfreeglut -lopengl32 -lglu32
+AquaLife.exe
 ```
 
-**2. Open the project**
+If Windows reports that `freeglut.dll` is missing, copy `freeglut.dll` from the FreeGLUT `bin` folder into the same folder as `AquaLife.exe`.
 
-Open the cloned project folder in Visual Studio Code.
+### Linux (Ubuntu or Debian)
 
-**3. Configure dependencies**
+```bash
+sudo apt install freeglut3-dev
+g++ src/main.cpp -o AquaLife -lglut -lGL -lGLU
+./AquaLife
+```
 
-Make sure OpenGL and FreeGLUT are properly configured with your MinGW compiler.
+## Controls
 
-**4. Compile the project**
+| Key | Action |
+| --- | --- |
+| Up / Down arrow | Tilt the camera up or down |
+| Left / Right arrow | Rotate the camera around the tank |
+| `+` or `=` | Zoom in |
+| `-` or `_` | Zoom out |
+| Space | Pause or resume the animation |
+| `R` | Reset the camera |
+| `Esc` | Close the program |
 
-Compile `main.cpp` using your configured compiler and OpenGL/FreeGLUT library paths.
-
-**5. Run the application**
-
-Execute the generated program to explore the interactive 3D aquarium.
-
-## 🚀 Planned Features and Improvements
-
-The following features are planned for future development:
-
-- Expanding water ripple effects.
-- Rocks and underwater decorations.
-- Underwater light rays and floating particles.
-- DDA line drawing algorithm.
-- Bresenham line drawing algorithm.
-- Midpoint circle drawing algorithm.
-- Bitmap or outline text rendering.
-- Improved fish movement and collision handling.
-- Complete feature integration.
-- Final testing and performance optimization.
-
-## 📚 Computer Graphics Concepts
-
-This project demonstrates the following computer graphics concepts:
-
-- 3D object modeling.
-- Geometric transformations.
-- Animation and motion.
-- Lighting and shading.
-- Transparency and blending.
-- Camera control and projection.
-- Mathematical wave generation.
-- Line drawing algorithms.
-- Circle drawing algorithms.
-
-## 👩‍💻 Student Information
-
-| Information  | Details                                            |
-| ------------ | -------------------------------------------------- |
-| Student Name | Rehab Binte Alamgir                                |
-| Course Code  | CSE-4742                                           |
-| Course Title | Computer Graphics Lab                              |
-| Semester     | 7th Semester                                       |
-| Session      | Spring 2026                                        |
-| Instructor   | Sultana Tasnim Jahan                               |
-| Institution  | International Islamic University Chittagong (IIUC) |
-
-## 📂 Repository Structure
+## Project Structure
 
 ```text
 AquaLife-OpenGL/
-│
-├── main.cpp
+├── src/
+│   └── main.cpp
+├── Screenshots/
+│   ├── 1.png
+│   └── 2.png
+├── CMakeLists.txt
 ├── README.md
-├── screenshots/
-│   └── (Project screenshots)
-│
-├── .vscode/
-│   ├── c_cpp_properties.json
-│   ├── launch.json
-│   └── settings.json
-│
 └── .gitignore
 ```
 
-*The repository structure may change as development continues.*
+## Planned Work
 
-## 📸 Project Screenshots
+- Rocks and small decorative objects on the floor
+- Underwater light rays and floating particles
+- Day and night lighting modes
+- Placing the aquarium in a room or roadside setting
+- Sound effects with a sound on/off control
+- Fish information shown when a fish is selected
 
-Project screenshots will be added here to showcase the aquarium environment, fish animations, water waves, and underwater effects.
+## Technologies
 
-\<!-- Add screenshots here after capturing them -->
+| Technology | Purpose |
+| --- | --- |
+| C++ | Application logic |
+| OpenGL | 3D rendering, lighting, fog, and blending |
+| FreeGLUT | Window creation, keyboard input, and animation timer |
 
-## 🔮 Future Scope
+## Student Information
 
-AquaLife can be extended with more realistic aquatic environments, additional marine creatures, advanced water and lighting effects, improved animation techniques, and enhanced interactive features.
+| Field | Details |
+| --- | --- |
+| Name | Rehab Binte Alamgir |
+| Student ID | C233455 |
+| Course | CSE-4742, Computer Graphics Lab |
+| Semester | 7th, Spring 2026 |
+| Instructor | Sultana Tasnim Jahan |
+| Institution | International Islamic University Chittagong (IIUC) |
 
-## 📌 Project Status
+## Status
 
-**🚧 Ongoing Development**
-
-AquaLife is currently under active development. The core aquarium environment, fish animations, underwater elements, interactive camera controls, and water surface animation are being developed and improved incrementally.
-
-Additional computer graphics algorithms and environmental effects will be integrated in upcoming development stages.
-
-## 🔗 GitHub Repository
-
-[**AquaLife – An Interactive 3D Aquarium Animation Using OpenGL**](https://github.com/Rehu33/AquaLife-OpenGL/)
-
----
-
-\<p align="center">
-&#x20; \<strong>🐠 AquaLife — Bringing the Underwater World to Life! 🌊\</strong>
-\</p>
+Ongoing. The project is developed in stages, and new visual features are added in each stage.
