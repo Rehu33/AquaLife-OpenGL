@@ -1,61 +1,210 @@
-# AquaLife
+# 🐠 AquaLife: An Interactive 3D Aquarium Animation Using OpenGL
 
-A small, self-contained 3D aquarium made with C++17, OpenGL, and FreeGLUT. The fish, plants, rocks, bubbles, light rays, and water effects are drawn in code; no artwork or other assets need to be downloaded.
+\<p align="center">   \<strong>Explore an Animated Underwater World with C++, OpenGL & FreeGLUT\</strong> \</p>
 
-## Windows setup (MSYS2 UCRT64)
+\<p align="center">   A Computer Graphics Lab Project \</p>
 
-These steps install the compiler and libraries locally on your PC. They do not create a GitHub repository or publish any project files.
+---
 
-1. Install **MSYS2** from [msys2.org](https://www.msys2.org/).
-2. Open **MSYS2 UCRT64** from the Start menu (not the MSYS, MinGW64, or plain UCRT64-independent terminal).
-3. Update the package database and install the toolchain:
+## 📖 About the Project
 
-   ```bash
-   pacman -Syu
-   ```
+**AquaLife** is an interactive 3D aquarium animation project developed using **C++, OpenGL, and FreeGLUT**. It creates a virtual underwater environment featuring colorful animated fish, rising bubbles, swaying aquatic plants, animated water waves, underwater lighting, and interactive camera controls.
 
-   If the update asks you to close the terminal, close it, reopen **MSYS2 UCRT64**, then continue with:
+The primary goal of this project is to demonstrate fundamental computer graphics concepts through an engaging and visually appealing 3D aquarium simulation.
 
-   ```bash
-   pacman -Su
-   pacman -S --needed mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja mingw-w64-ucrt-x86_64-freeglut
-   ```
+## 🎯 Project Objectives
 
-4. Add `C:\msys64\ucrt64\bin` to your Windows **PATH**, then restart VS Code. This lets CMake find the build tools and Windows load the FreeGLUT DLL. The project's build tasks use the UCRT64 compiler and CMake directly.
-5. In VS Code, choose **File > Open Folder...** and open this AquaLife project folder.
+- Create an interactive 3D aquarium environment.
+- Design and animate different types of fish.
+- Implement realistic underwater effects and environmental animations.
+- Apply fundamental computer graphics algorithms.
+- Demonstrate 3D transformations, lighting, and animation techniques.
+- Develop an engaging underwater simulation using OpenGL.
 
-If MSYS2 was installed somewhere other than `C:\msys64`, update the compiler path in `.vscode/settings.json` and the configure command below to match your installation.
+## ✨ Features
 
-## Build and run
+### 🐟 3D Aquarium Environment
 
-In VS Code, use **Terminal > Run Build Task... > AquaLife: build** (or press **Ctrl+Shift+B** with this folder open). To start the aquarium, use **Terminal > Run Task... > AquaLife: run**. If VS Code asks which build task to use, choose **AquaLife: build**.
+- 3D aquarium tank with transparent glass walls.
+- Sandy aquarium floor.
+- Underwater blue background.
+- Underwater lighting and fog effects.
+- Specular lighting highlights.
 
-Alternatively, open a new VS Code terminal (**Terminal > New Terminal**) and run these commands from the project folder:
+### 🌊 Animated Water Surface
 
-```powershell
-cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=C:/msys64/ucrt64/bin/g++.exe -DCMAKE_MAKE_PROGRAM=C:/msys64/ucrt64/bin/ninja.exe -DCMAKE_PREFIX_PATH=C:/msys64/ucrt64
-cmake --build build
-.\build\AquaLife.exe
+- Animated water surface using sine-based wave functions.
+- Smooth and continuous water movement.
+- Transparent blue water surface.
+- Dynamic wave animation using timer-based updates.
+
+### 🐠 Fish Modeling and Animation
+
+- Multiple colorful 3D fish.
+- Parametric 3D fish body modeling.
+- Detailed fish eyes, dorsal fins, pectoral fins, and tails.
+- White decorative body stripes.
+- Continuous swimming animation.
+- Animated tail and fin movements.
+- Automatic direction changes near aquarium boundaries.
+
+### 🫧 Underwater Elements
+
+- 50 rising animated bubbles.
+- Side-to-side bubble movement.
+- 20 swaying aquatic plants.
+
+### 🎮 Interactive Controls
+
+- Camera rotation.
+- Zoom in and zoom out.
+- Camera reset.
+- Pause and resume animation.
+- Exit functionality.
+
+## 🛠️ Technologies Used
+
+| Technology         | Purpose                           |
+| ------------------ | --------------------------------- |
+| C++                | Core programming language         |
+| OpenGL             | 3D graphics rendering             |
+| FreeGLUT           | Window management and interaction |
+| MinGW / GCC        | C++ compilation                   |
+| Visual Studio Code | Development environment           |
+
+## 🎮 Controls
+
+| Key       | Action                     |
+| --------- | -------------------------- |
+| ↑ / ↓     | Rotate camera vertically   |
+| ← / →     | Rotate camera horizontally |
+| `+` / `=` | Zoom in                    |
+| `-` / `_` | Zoom out                   |
+| `R`       | Reset camera               |
+| `Space`   | Pause / Resume animation   |
+| `Esc`     | Exit the application       |
+
+## ⚙️ Installation and Setup
+
+### Prerequisites
+
+Make sure the following tools and libraries are installed:
+
+- Windows operating system
+- Visual Studio Code
+- MinGW / GCC compiler
+- OpenGL libraries
+- FreeGLUT library
+
+### Steps to Run
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/Rehu33/AquaLife-OpenGL.git
 ```
 
-**Important:** Do not use the C/C++ extension's **build active file** task or the Code Runner **Run Code** button. Those compile `main.cpp` directly with the old `g++`, without FreeGLUT's include and link settings, which produces `GL/freeglut.h: No such file or directory`.
+**2. Open the project**
 
-## Controls
+Open the cloned project folder in Visual Studio Code.
 
-| Key | Action |
-| --- | --- |
-| Arrow keys | Rotate the view |
-| Left mouse button + drag | Rotate the view |
-| Mouse wheel | Zoom in or out |
-| `+` / `-` | Zoom in / out |
-| Space | Pause or resume the animation |
-| `R` | Reset the camera |
-| `Esc` | Close the aquarium |
+**3. Configure dependencies**
 
-## Troubleshooting
+Make sure OpenGL and FreeGLUT are properly configured with your MinGW compiler.
 
-- **CMake cannot find GLUT or OpenGL:** Open the **MSYS2 UCRT64** terminal and check that `mingw-w64-ucrt-x86_64-freeglut` and the UCRT64 GCC/CMake packages are installed. Confirm `C:\msys64\ucrt64\bin` is on PATH, restart VS Code, and rerun the configure command.
-- **The app says `freeglut.dll` is missing:** Add `C:\msys64\ucrt64\bin` to PATH, then launch it from a new terminal.
-- **A different compiler is selected:** Use the UCRT64 `g++.exe` path shown in the configure command. Do not mix MSYS2 environments (for example UCRT64 and MinGW64).
+**4. Compile the project**
 
-This project uses FreeGLUT's compatibility-style immediate-mode OpenGL calls for simplicity and broad driver support. A working desktop OpenGL driver is required; rendering quality and frame rate depend on the machine's graphics driver.
+Compile `main.cpp` using your configured compiler and OpenGL/FreeGLUT library paths.
+
+**5. Run the application**
+
+Execute the generated program to explore the interactive 3D aquarium.
+
+## 🚀 Planned Features and Improvements
+
+The following features are planned for future development:
+
+- Expanding water ripple effects.
+- Rocks and underwater decorations.
+- Underwater light rays and floating particles.
+- DDA line drawing algorithm.
+- Bresenham line drawing algorithm.
+- Midpoint circle drawing algorithm.
+- Bitmap or outline text rendering.
+- Improved fish movement and collision handling.
+- Complete feature integration.
+- Final testing and performance optimization.
+
+## 📚 Computer Graphics Concepts
+
+This project demonstrates the following computer graphics concepts:
+
+- 3D object modeling.
+- Geometric transformations.
+- Animation and motion.
+- Lighting and shading.
+- Transparency and blending.
+- Camera control and projection.
+- Mathematical wave generation.
+- Line drawing algorithms.
+- Circle drawing algorithms.
+
+## 👩‍💻 Student Information
+
+| Information  | Details                                            |
+| ------------ | -------------------------------------------------- |
+| Student Name | Rehab Binte Alamgir                                |
+| Course Code  | CSE-4742                                           |
+| Course Title | Computer Graphics Lab                              |
+| Semester     | 7th Semester                                       |
+| Session      | Spring 2026                                        |
+| Instructor   | Sultana Tasnim Jahan                               |
+| Institution  | International Islamic University Chittagong (IIUC) |
+
+## 📂 Repository Structure
+
+```text
+AquaLife-OpenGL/
+│
+├── main.cpp
+├── README.md
+├── screenshots/
+│   └── (Project screenshots)
+│
+├── .vscode/
+│   ├── c_cpp_properties.json
+│   ├── launch.json
+│   └── settings.json
+│
+└── .gitignore
+```
+
+*The repository structure may change as development continues.*
+
+## 📸 Project Screenshots
+
+Project screenshots will be added here to showcase the aquarium environment, fish animations, water waves, and underwater effects.
+
+\<!-- Add screenshots here after capturing them -->
+
+## 🔮 Future Scope
+
+AquaLife can be extended with more realistic aquatic environments, additional marine creatures, advanced water and lighting effects, improved animation techniques, and enhanced interactive features.
+
+## 📌 Project Status
+
+**🚧 Ongoing Development**
+
+AquaLife is currently under active development. The core aquarium environment, fish animations, underwater elements, interactive camera controls, and water surface animation are being developed and improved incrementally.
+
+Additional computer graphics algorithms and environmental effects will be integrated in upcoming development stages.
+
+## 🔗 GitHub Repository
+
+[**AquaLife – An Interactive 3D Aquarium Animation Using OpenGL**](https://github.com/Rehu33/AquaLife-OpenGL/)
+
+---
+
+\<p align="center">
+&#x20; \<strong>🐠 AquaLife — Bringing the Underwater World to Life! 🌊\</strong>
+\</p>
