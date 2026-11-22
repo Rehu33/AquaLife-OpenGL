@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include "common.h"      // <-- এই লাইনটা যোগ করো
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -16,34 +17,9 @@ float cameraDistance = 22.0f;
 int lastTime = 0;
 int lastMouseX = 0;
 int lastMouseY = 0;
-float globalTime = 0.0f;
-bool isPaused = false;
 bool isDraggingCamera = false;
 
-const float TANK_WIDTH = 20.0f;
-const float TANK_HEIGHT = 10.0f;
-const float TANK_DEPTH = 15.0f;
 
-// Water level (surface sits slightly below the tank rim)
-const float WATER_LEVEL = TANK_HEIGHT - 0.35f;
-
-struct Bubble { float x, y, z, speed, size, wobbleOffset; };
-struct Plant { float x, z, height, segmentLength, swayOffset; int segments; };
-
-std::vector<Bubble> bubbles;
-std::vector<Plant> plants;
-
-struct V3 { float x, y, z; };
-
-static V3 v3sub(V3 a, V3 b) { return { a.x - b.x, a.y - b.y, a.z - b.z }; }
-static V3 v3scale(V3 a, float s) { return { a.x * s, a.y * s, a.z * s }; }
-static float v3dot(V3 a, V3 b) { return a.x * b.x + a.y * b.y + a.z * b.z; }
-static V3 v3cross(V3 a, V3 b) {
-    return { a.y * b.z - a.z * b.y,
-             a.z * b.x - a.x * b.z,
-             a.x * b.y - a.y * b.x };
-}
-static float clamp01(float t) { return t < 0.0f ? 0.0f : (t > 1.0f ? 1.0f : t); }
 
 float profileR(float u) {
     u = clamp01(u);
