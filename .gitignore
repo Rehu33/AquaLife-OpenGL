@@ -11,3 +11,4 @@ build.ninja
 **/output/*.ilk
 **/output/*.pdb
 InstallationLog.txt
+*.exe
