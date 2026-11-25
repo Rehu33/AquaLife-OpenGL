@@ -1,22 +1,22 @@
-cmake_minimum_required(VERSION 3.20)
-
-project(AquaLife LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.10)
+project(AquaLife CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
-
-add_executable(AquaLife
+add_executable(aqualife
     src/main.cpp
+    src/common.cpp
+    src/fish.cpp
+    src/environment.cpp
+    src/water.cpp
+    src/particles.cpp
 )
 
-target_link_libraries(AquaLife PRIVATE OpenGL::GL OpenGL::GLU GLUT::GLUT)
+target_include_directories(aqualife PRIVATE include)
 
-if(MSVC)
-    target_compile_options(AquaLife PRIVATE /W4)
+if(WIN32)
+    target_link_libraries(aqualife PRIVATE freeglut opengl32 glu32)
 else()
-    target_compile_options(AquaLife PRIVATE -Wall -Wextra -Wpedantic)
+    target_link_libraries(aqualife PRIVATE glut GL GLU)
 endif()
