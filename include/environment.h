@@ -9,3 +9,6 @@ void drawSandBottom();
 void drawRocks();
 void drawPlants();
 void drawBubbles();
+
+// Decorative underwater light shafts.
+void drawLightRays();

@@ -120,3 +120,99 @@ void drawBubbles() {
         glPopMatrix();
     }
 }
+
+// ---------- Light rays ----------
+
+// Draw one soft ribbon of light.
+// horizontalX = true: ribbon spreads along X.
+// horizontalX = false: ribbon spreads along Z.
+static void drawLightRibbon(float centerX, float centerZ, float phase, bool horizontalX) {
+    const int verticalSteps = 12;
+    const int widthSteps = 8;
+
+    const float topY = WATER_LEVEL - 0.35f;
+    const float bottomY = 0.45f;
+
+    float brightness = 0.85f + 0.15f * std::sin(globalTime * 0.6f + phase);
+
+    for (int row = 0; row < verticalSteps; ++row) {
+        glBegin(GL_QUAD_STRIP);
+
+        for (int col = 0; col <= widthSteps; ++col) {
+            // Across the ribbon: -1 at one edge, +1 at the other.
+            float across = -1.0f + 2.0f * col / static_cast<float>(widthSteps);
+
+            // Zero brightness at both side edges.
+            float sideFade = 1.0f - across * across;
+
+            for (int edge = 0; edge < 2; ++edge) {
+                // t = 0 at the top; t = 1 at the bottom.
+                float t = (row + edge) / static_cast<float>(verticalSteps);
+
+                float y = topY + (bottomY - topY) * t;
+
+                // Beam becomes wider toward the bottom.
+                float halfWidth = 0.18f + 0.65f * t;
+
+                // Gentle slant and animated sideways movement.
+                float sway = std::sin(globalTime * 0.4f + phase + t) * 0.18f;
+
+                float x = centerX + 0.7f * t + sway;
+                float z = centerZ + 0.25f * t;
+
+                if (horizontalX) {
+                    x += across * halfWidth;
+                } else {
+                    z += across * halfWidth;
+                }
+
+                // Fade in near the top and fade out near the bottom.
+                float topFade = clamp01(t / 0.12f);
+                float bottomFade = 1.0f - t;
+
+                float alpha = 0.10f * brightness * sideFade * topFade * bottomFade;
+
+                glColor4f(0.65f, 0.85f, 1.0f, alpha);
+                glVertex3f(x, y, z);
+            }
+        }
+
+        glEnd();
+    }
+}
+
+void drawLightRays() {
+    // Preserve the states changed by this effect.
+    glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |
+                 GL_CURRENT_BIT | GL_LIGHTING_BIT);
+
+    glDisable(GL_LIGHTING);
+    glDisable(GL_FOG);        // fog would tint the additive colour
+    glDisable(GL_CULL_FACE);
+    glShadeModel(GL_SMOOTH);
+
+    // Opaque objects still hide the beam, but the beam does not write depth.
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_FALSE);
+
+    // Additive blending: the beam adds light to what is behind it.
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+    // Beam centres (x, z)
+    const float positions[3][2] = {
+        {-6.0f, -3.5f},
+        {-1.5f,  1.0f},
+        { 4.0f, -2.5f}
+    };
+
+    for (int i = 0; i < 3; ++i) {
+        float phase = i * 1.7f;
+
+        // Two crossed ribbons so the beam is visible from more angles.
+        drawLightRibbon(positions[i][0], positions[i][1], phase, true);
+        drawLightRibbon(positions[i][0], positions[i][1], phase, false);
+    }
+
+    glPopAttrib();
+}

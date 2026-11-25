@@ -127,6 +127,7 @@ void display() {
 
     // 3) Other transparent objects: do not write depth
     glDepthMask(GL_FALSE);
+    drawLightRays();
     drawParticles();
     drawBubbles();
     drawGlassTank();
