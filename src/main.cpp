@@ -8,6 +8,7 @@
 #include "fish.h"
 #include "environment.h"
 #include "water.h"
+#include "particles.h"
 
 // ---------- Camera and input state ----------
 float cameraAngleX = 20.0f;
@@ -126,6 +127,7 @@ void display() {
 
     // 3) Other transparent objects: do not write depth
     glDepthMask(GL_FALSE);
+    drawParticles();
     drawBubbles();
     drawGlassTank();
     glDepthMask(GL_TRUE);
@@ -142,6 +144,7 @@ void update(int) {
         globalTime += deltaTime;
         for (auto& fish : schoolOfFish) fish.update(deltaTime);
         updateBubbles(deltaTime);
+        updateParticles(deltaTime);
     }
 
     glutPostRedisplay();
@@ -212,6 +215,7 @@ int main(int argc, char** argv) {
     initGL();
     initEnvironment();
     initFish();
+    initParticles();
     lastTime = glutGet(GLUT_ELAPSED_TIME);
 
     glutDisplayFunc(display);
