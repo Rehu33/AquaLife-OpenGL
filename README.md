@@ -1,6 +1,6 @@
 # 🐠 AquaLife: An Interactive 3D Aquarium Animation Using OpenGL
 
-**AquaLife** is an interactive 3D aquarium application developed using **C++, OpenGL, and FreeGLUT**. It creates an underwater environment where five colorful 3D fish swim inside a transparent glass aquarium, surrounded by animated water waves, rising bubbles, swaying aquatic plants, rocks, and underwater fog.
+**AquaLife** is an interactive 3D aquarium application developed using **C++, OpenGL, and FreeGLUT**. It creates an underwater environment where five colorful 3D fish swim inside a transparent glass aquarium, surrounded by animated water waves, rising bubbles, floating particles, soft light rays, swaying aquatic plants, rocks, and underwater fog.
 
 The entire aquarium scene is generated programmatically using OpenGL. No external image, texture, or 3D model files are required for the core scene.
 
@@ -37,6 +37,18 @@ This project is developed as part of the **Computer Graphics Lab (CSE-4742)** at
 - Continuous upward movement.
 - Side-to-side wobbling motion.
 - Bubbles restart when they reach the water surface.
+
+### ✨ Floating Particles
+- 100 small suspended particles drawn as smooth, semi-transparent points.
+- Slow upward movement with gentle sine-based sideways drift.
+- Particles restart from the bottom when they reach the water surface.
+- Particle animation pauses together with the rest of the scene.
+
+### 🌅 Underwater Light Rays
+- Three soft light shafts falling from the water surface.
+- Beams widen toward the bottom and fade at the edges and near the floor.
+- Crossed transparent ribbons with additive blending.
+- Slow swaying and brightness variation over time.
 
 ### 🌿 Aquatic Plants
 - 20 animated underwater plants.
@@ -94,7 +106,7 @@ This project is developed as part of the **Computer Graphics Lab (CSE-4742)** at
 **3.** Compile all source files:
 
 ```cmd
-g++ -std=c++17 -Iinclude src/main.cpp src/common.cpp src/fish.cpp src/environment.cpp src/water.cpp -o AquaLife.exe -lfreeglut -lopengl32 -lglu32
+g++ -std=c++17 -Iinclude src/main.cpp src/common.cpp src/fish.cpp src/environment.cpp src/water.cpp src/particles.cpp -o AquaLife.exe -lfreeglut -lopengl32 -lglu32
 ```
 
 **4.** Run the application:
@@ -117,7 +129,7 @@ sudo apt install build-essential freeglut3-dev
 Compile the project:
 
 ```bash
-g++ -std=c++17 -Iinclude src/main.cpp src/common.cpp src/fish.cpp src/environment.cpp src/water.cpp -o AquaLife -lglut -lGL -lGLU
+g++ -std=c++17 -Iinclude src/main.cpp src/common.cpp src/fish.cpp src/environment.cpp src/water.cpp src/particles.cpp -o AquaLife -lglut -lGL -lGLU
 ```
 
 Run the application:
@@ -138,6 +150,8 @@ Run the application:
 | Right Arrow | Rotate camera right |
 | `+` or `=` | Zoom in |
 | `-` or `_` | Zoom out |
+| Left mouse drag | Rotate camera |
+| Mouse wheel | Zoom in and out |
 | `Space` | Pause or resume animation |
 | `R` | Reset camera |
 | `Esc` | Exit the application |
@@ -155,6 +169,7 @@ AquaLife-OpenGL/
 │   ├── common.h
 │   ├── environment.h
 │   ├── fish.h
+│   ├── particles.h
 │   └── water.h
 │
 ├── src/
@@ -162,12 +177,14 @@ AquaLife-OpenGL/
 │   ├── common.cpp
 │   ├── environment.cpp
 │   ├── fish.cpp
+│   ├── particles.cpp
 │   └── water.cpp
 │
 ├── Screenshots/
 │   ├── 1.png
 │   └── 2.png
 │
+├── CMakeLists.txt
 ├── .gitignore
 └── README.md
 ```
@@ -178,9 +195,10 @@ AquaLife-OpenGL/
 |---|---|
 | `common.h / common.cpp` | Shared structures, constants, and mathematical utilities |
 | `fish.h / fish.cpp` | Fish modeling, movement, and animation |
-| `environment.h / environment.cpp` | Aquarium environment, bubbles, plants, rocks, and sand |
+| `environment.h / environment.cpp` | Aquarium environment: bubbles, plants, rocks, sand, and light rays |
 | `water.h / water.cpp` | Water surface and wave animation |
-| `main.cpp` | Application entry point and initialization |
+| `particles.h / particles.cpp` | Floating underwater particles |
+| `main.cpp` | Application entry point, camera, glass tank, and input handling |
 
 ---
 
@@ -188,7 +206,6 @@ AquaLife-OpenGL/
 
 The following features are planned for future development:
 
-- Underwater light rays and floating particles.
 - Day and night lighting modes.
 - Placing the aquarium in a realistic room or roadside environment.
 - Sound effects with sound on/off controls.
@@ -205,10 +222,11 @@ This project demonstrates several fundamental computer graphics concepts:
 - 3D object modeling using geometric primitives.
 - Parametric modeling using mathematical functions.
 - Transformations and camera manipulation.
-- Lighting, shading, transparency, and blending.
+- Lighting, shading, transparency, and blending (including additive blending).
 - Fog and depth effects.
 - Time-based animation.
 - Sine-wave-based surface deformation.
+- Point-based particle rendering.
 - Interactive graphics using keyboard and mouse input.
 
 ---
@@ -230,7 +248,7 @@ This project demonstrates several fundamental computer graphics concepts:
 
 **Ongoing – Under Development**
 
-AquaLife is being developed in stages. The core aquarium environment, fish animation, bubbles, aquatic plants, rocks, camera controls, and animated water surface have been implemented. Additional interactive and visual features are planned for future development.
+AquaLife is being developed in stages. The core aquarium environment, fish animation, bubbles, floating particles, light rays, aquatic plants, rocks, camera controls, and animated water surface have been implemented. Additional interactive and visual features are planned for future development.
 
 ---
 
