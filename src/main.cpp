@@ -23,11 +23,14 @@ bool isDraggingCamera = false;
 std::vector<Fish> schoolOfFish;
 
 void initFish() {
-    schoolOfFish.push_back(Fish(0, 4, 0,  0.8f, 1.0f, 0.4f, 0.0f));
-    schoolOfFish.push_back(Fish(3, 6, 2,  0.6f, 0.1f, 0.5f, 1.0f));
-    schoolOfFish.push_back(Fish(-4, 3, -3, 0.9f, 1.0f, 0.1f, 0.3f));
-    schoolOfFish.push_back(Fish(2, 7, -5, 0.7f, 1.0f, 0.9f, 0.0f));
-    schoolOfFish.push_back(Fish(-5, 5, 4,  0.7f, 0.8f, 0.2f, 0.8f));
+    // Seven fish, each with its own look (see species presets in fish.cpp)
+    schoolOfFish.push_back(Fish( 0, 4,  0, 0.80f, speciesTallStriped()));
+    schoolOfFish.push_back(Fish( 3, 6,  2, 0.60f, speciesGoldfish()));
+    schoolOfFish.push_back(Fish(-4, 3, -3, 0.70f, speciesBlueYellowTail()));
+    schoolOfFish.push_back(Fish( 2, 7, -5, 0.50f, speciesYellow()));
+    schoolOfFish.push_back(Fish(-5, 5,  4, 0.60f, speciesRedLine()));
+    schoolOfFish.push_back(Fish( 5, 3, -2, 0.65f, speciesRedBack()));
+    schoolOfFish.push_back(Fish(-2, 6,  3, 0.50f, speciesBlueStriped()));
 }
 
 void initGL() {
